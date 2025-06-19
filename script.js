@@ -58,6 +58,92 @@ if (darkModeIcon) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Scroll animation observer
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for scroll animations
+    const animatedElements = document.querySelectorAll('.heading, .home-detail, .home-img, .services-box, .experience-card, .portfolio-box, .contact-item, .skill-logo-card');
+    
+    animatedElements.forEach((el, index) => {
+        // Add animation classes based on element type
+        if (el.classList.contains('heading')) {
+            el.classList.add('fade-in');
+        } else if (el.classList.contains('home-detail')) {
+            el.classList.add('slide-in-left');
+        } else if (el.classList.contains('home-img')) {
+            el.classList.add('slide-in-right');
+        } else if (el.classList.contains('services-box') || el.classList.contains('portfolio-box')) {
+            el.classList.add('fade-in');
+        } else if (el.classList.contains('experience-card')) {
+            el.classList.add('slide-in-left');
+        } else if (el.classList.contains('contact-item')) {
+            el.classList.add('fade-in');
+        } else if (el.classList.contains('skill-logo-card')) {
+            el.classList.add('fade-in');
+        }
+        
+        observer.observe(el);
+    });
+
+    // Neon cursor functionality
+    let cursor = document.querySelector('.cursor');
+    
+    // Create cursor if it doesn't exist
+    if (!cursor) {
+        cursor = document.createElement('div');
+        cursor.className = 'cursor';
+        document.body.appendChild(cursor);
+    }
+
+    // Optimized mouse tracking with throttling
+    let ticking = false;
+    
+    function updateCursor(e) {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+
+    document.addEventListener('mousemove', updateCursor, { passive: true });
+
+    // Simplified hover effects
+    const interactiveElements = document.querySelectorAll('a, button, .btn, .resume-btn, .social-icon, #darkMode-icon, #menu-icon');
+    
+    interactiveElements.forEach(element => {
+        element.addEventListener('mouseenter', () => {
+            cursor.classList.add('hover');
+        });
+        
+        element.addEventListener('mouseleave', () => {
+            cursor.classList.remove('hover');
+        });
+    });
+
+    // Hide cursor when leaving window
+    document.addEventListener('mouseleave', () => {
+        cursor.style.opacity = '0';
+    });
+    
+    document.addEventListener('mouseenter', () => {
+        cursor.style.opacity = '1';
+    });
+
     // Initialize EmailJS with error handling
     try {
         emailjs.init("Otmq-8oi55gBLAwwC");
@@ -81,6 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Start loading state
                 submitBtn.classList.add('sending');
                 loadingDots.classList.add('show');
+                btnText.textContent = 'Sending';
                 submitBtn.disabled = true;
             }
 
@@ -106,17 +193,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 );
                 
                 // Show success state
-                if (submitBtn && loadingDots) {
+                if (submitBtn && loadingDots && btnText) {
                     loadingDots.classList.remove('show');
                     submitBtn.classList.remove('sending');
                     submitBtn.classList.add('success');
+                    btnText.textContent = 'Message Sent!';
                 }
 
                 // Reset form after delay
                 setTimeout(() => {
                     contactForm.reset();
-                    if (submitBtn) {
+                    if (submitBtn && btnText) {
                         submitBtn.classList.remove('success');
+                        btnText.textContent = 'Send Message';
                         submitBtn.disabled = false;
                     }
                 }, 3000);
@@ -126,9 +215,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Oops! Something went wrong: ' + error.message);
                 
                 // Reset button on error
-                if (submitBtn && loadingDots) {
+                if (submitBtn && loadingDots && btnText) {
                     submitBtn.classList.remove('sending');
                     loadingDots.classList.remove('show');
+                    btnText.textContent = 'Send Message';
                     submitBtn.disabled = false;
                 }
             }
