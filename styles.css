@@ -18,6 +18,7 @@
     --second-bg-color: #323946;
     --text-color: #fff;
     --main-color: #00e5ff;
+    --main-color-rgb: 0, 229, 255;
     --white-color: #fff;
     --disabled-color: #fff3;
 }
@@ -27,6 +28,7 @@ body.light-mode {
     --second-bg-color: #f5f5f5;
     --text-color: #1f242d;
     --main-color: #00a3cc;
+    --main-color-rgb: 0, 163, 204;
     --white-color: #1f242d;
 }
 
@@ -1619,6 +1621,12 @@ body.light-mode .dots .dot.active {
     z-index: 1;
 }
 
+.contact-form .btn-box .btn.sending {
+    animation: sendingPulse 1.5s ease-in-out infinite;
+    background: var(--bg-color);
+    color: var(--main-color);
+}
+
 .contact-form .btn-box .btn.sending::before {
     left: 0;
 }
@@ -1641,7 +1649,8 @@ body.light-mode .dots .dot.active {
 .contact-form .btn-box .btn.success {
     background: var(--main-color);
     box-shadow: 0 0 20px var(--main-color);
-    animation: successGlow 1s ease;
+    animation: successGlow 1s ease, successBounce 0.6s ease 0.3s;
+    transform: scale(1.05);
 }
 
 .contact-form .btn-box .btn.success span {
@@ -1693,6 +1702,17 @@ body.light-mode .dots .dot.active {
     }
 }
 
+@keyframes sendingPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(var(--main-color-rgb), 0.7);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 0 10px rgba(var(--main-color-rgb), 0);
+    }
+}
+
 @keyframes successGlow {
     0% {
         box-shadow: 0 0 20px var(--main-color);
@@ -1702,6 +1722,15 @@ body.light-mode .dots .dot.active {
     }
     100% {
         box-shadow: 0 0 20px var(--main-color);
+    }
+}
+
+@keyframes successBounce {
+    0%, 100% {
+        transform: scale(1.05);
+    }
+    50% {
+        transform: scale(1.1);
     }
 }
 

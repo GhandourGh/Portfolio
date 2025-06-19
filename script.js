@@ -192,6 +192,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     formData
                 );
                 
+                // Add a small delay for better visual feedback
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
                 // Show success state
                 if (submitBtn && loadingDots && btnText) {
                     loadingDots.classList.remove('show');
