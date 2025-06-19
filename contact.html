@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <!-- Theme initialization -->
+    <script>
+        // Apply theme immediately to prevent flash
+        document.documentElement.style.visibility = 'hidden';
+        document.addEventListener('DOMContentLoaded', function() {
+            document.documentElement.style.visibility = '';
+        });
+        
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+    </script>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- boxicons-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- css -->
+    <link rel="stylesheet" href="styles.css?v=1.1">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">Ghandour.</a>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="resume.html">Resume</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+
+        <div class="header-icons">
+            <i class='bx bx-moon' id="darkMode-icon"></i>
+            <i class='bx bx-menu' id="menu-icon"></i>
+        </div>
+    </header>
+
+    <section class="contact active">
+        <h2 class="heading">Contact <span>Me</span></h2>
+        
+        <div class="contact-layout">
+            <!-- Left Column - Contact Information -->
+            <div class="contact-container contact-info-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class='bx bx-envelope'></i>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <a href="https://mail.google.com/mail/?view=cm&to=gghandour03@gmail.com&subject=Work%20Opportunity&body=Hello%20Ghandour,%0A%0AI%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20potential%20work%20opportunity%20with%20you.%0A%0ABest%20regards," class="contact-link" target="_blank" rel="noopener noreferrer">gghandour03@gmail.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class='bx bx-phone'></i>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <a href="tel:+96176088440" class="contact-link">+961 76 088 440</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class='bx bx-map'></i>
+                        <div class="contact-details">
+                            <h3>Location</h3>
+                            <p>Beirut, Lebanon</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <h3>Connect With Me</h3>
+                    <div class="social-icons">
+                        <a href="https://github.com/GhandourGh" class="social-icon" target="_blank" rel="noopener noreferrer">
+                            <i class='bx bxl-github'></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/GhandourGh" class="social-icon" target="_blank" rel="noopener noreferrer">
+                            <i class='bx bxl-linkedin'></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Contact Form -->
+            <div class="contact-container contact-form-container">
+                <h3>Send Me a Message</h3>
+                <form id="contactForm" class="contact-form">
+                    <div class="input-box">
+                        <div class="input-field">
+                            <input type="text" id="from_name" name="from_name" placeholder="Full Name" required>
+                        </div>
+                        <div class="input-field">
+                            <input type="email" id="from_email" name="from_email" placeholder="Email Address" required>
+                        </div>
+                    </div>
+                    <div class="input-box">
+                        <div class="input-field">
+                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                        </div>
+                    </div>
+                    <div class="textarea-field">
+                        <textarea id="message" name="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
+                    </div>
+                    <div class="btn-box">
+                        <button type="submit" class="btn">
+                            <span>Send Message</span>
+                            <div class="loading-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- custom js link -->
+    <script src="script.js?v=1.1"></script>
+</body>
+</html> 

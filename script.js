@@ -58,51 +58,6 @@ if (darkModeIcon) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Smooth scrolling for navigation links
-    const navLinks = document.querySelectorAll('nav a[href^="#"]');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Remove active class from all nav links
-            navLinks.forEach(navLink => navLink.classList.remove('active'));
-            // Add active class to clicked link
-            this.classList.add('active');
-            
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    // Update active nav link on scroll
-    const sections = document.querySelectorAll('section[id]');
-    
-    function updateActiveNavLink() {
-        const scrollPos = window.scrollY + 100;
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            const navLink = document.querySelector(`nav a[href="#${sectionId}"]`);
-            
-            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                navLinks.forEach(link => link.classList.remove('active'));
-                if (navLink) navLink.classList.add('active');
-            }
-        });
-    }
-    
-    window.addEventListener('scroll', updateActiveNavLink);
-
     // Scroll animation observer
     const observerOptions = {
         threshold: 0.1,
@@ -300,101 +255,109 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Portfolio project selector functionality
-    const projectBtns = document.querySelectorAll('.project-btn');
-    const projectDetails = document.querySelectorAll('.project-detail');
+    // Portfolio carousel functionality
+    const carousels = document.querySelectorAll('.portfolio-carousel');
     
-    projectBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Remove active from all buttons and details
-            projectBtns.forEach(b => b.classList.remove('active'));
-            projectDetails.forEach(detail => detail.classList.remove('active'));
-            
-            // Add active to clicked button
-            this.classList.add('active');
-            
-            // Show corresponding project detail
-            const projectId = this.getAttribute('data-project');
-            const targetDetail = document.getElementById(projectId + '-project');
-            if (targetDetail) {
-                targetDetail.classList.add('active');
-                // Reset gallery to first slide for the new project
-                resetGallery(targetDetail);
-            }
-        });
-    });
-
-    // Gallery functionality for each project
-    function initializeGallery(projectDetail) {
-        const carousel = projectDetail.querySelector('.gallery-carousel');
-        const slides = carousel.querySelectorAll('.gallery-slide');
-        const dots = projectDetail.querySelectorAll('.gallery-dots .dot');
-        const prevBtn = projectDetail.querySelector('.gallery-btn.prev');
-        const nextBtn = projectDetail.querySelector('.gallery-btn.next');
-        
+    carousels.forEach(carousel => {
+        const imageSlide = carousel.querySelector('.image-slide');
+        const progressFill = carousel.querySelector('.progress-fill');
+        const currentSlideEl = carousel.querySelector('.slide-counter .current');
+        const leftBtn = carousel.parentElement.querySelector('.arrow-left');
+        const rightBtn = carousel.parentElement.querySelector('.arrow-right');
+        const totalSlides = imageSlide.children.length;
         let currentSlide = 0;
-        const totalSlides = slides.length;
         
-        function showSlide(index) {
-            // Hide all slides
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
+        // Function to update slide position and progress
+        const updateSlide = (index) => {
+            currentSlide = index;
+            const progress = ((index + 1) / totalSlides) * 100;
             
-            // Show current slide
-            slides[index].classList.add('active');
-            dots[index].classList.add('active');
+            // Update image position with smooth transition
+            imageSlide.style.transform = `translateX(-${index * (100 / totalSlides)}%)`;
             
-            // Update button states
-            prevBtn.disabled = index === 0;
-            nextBtn.disabled = index === totalSlides - 1;
-        }
+            // Animate progress bar
+            progressFill.style.transform = `translateX(${progress - 100}%)`;
+            
+            // Update counter
+            currentSlideEl.textContent = index + 1;
+        };
         
-        // Event listeners for navigation
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                showSlide(currentSlide);
-            });
-        }
+        // Initialize progress bar width based on total slides
+        progressFill.style.width = `${100}%`;
+        progressFill.style.transform = 'translateX(-75%)';
         
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                currentSlide = (currentSlide + 1) % totalSlides;
-                showSlide(currentSlide);
-            });
-        }
-        
-        // Event listeners for dots
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                currentSlide = index;
-                showSlide(currentSlide);
-            });
+        // Navigation buttons
+        leftBtn.addEventListener('click', () => {
+            const newIndex = currentSlide > 0 ? currentSlide - 1 : totalSlides - 1;
+            updateSlide(newIndex);
         });
+        
+        rightBtn.addEventListener('click', () => {
+            const newIndex = currentSlide < totalSlides - 1 ? currentSlide + 1 : 0;
+            updateSlide(newIndex);
+        });
+        
+        // Touch swipe functionality
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        carousel.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+        
+        carousel.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+        
+        const handleSwipe = () => {
+            const swipeThreshold = 50;
+            
+            if (touchEndX < touchStartX - swipeThreshold) {
+                // Swipe left
+                const newIndex = currentSlide < totalSlides - 1 ? currentSlide + 1 : 0;
+                updateSlide(newIndex);
+            }
+            
+            if (touchEndX > touchStartX + swipeThreshold) {
+                // Swipe right
+                const newIndex = currentSlide > 0 ? currentSlide - 1 : totalSlides - 1;
+                updateSlide(newIndex);
+            }
+        };
         
         // Initialize first slide
-        showSlide(0);
-    }
-    
-    function resetGallery(projectDetail) {
-        const slides = projectDetail.querySelectorAll('.gallery-slide');
-        const dots = projectDetail.querySelectorAll('.gallery-dots .dot');
-        
-        // Reset to first slide
-        slides.forEach(slide => slide.classList.remove('active'));
-        dots.forEach(dot => dot.classList.remove('active'));
-        
-        if (slides[0]) slides[0].classList.add('active');
-        if (dots[0]) dots[0].classList.add('active');
-        
-        // Reinitialize gallery
-        initializeGallery(projectDetail);
-    }
-    
-    // Initialize galleries for all projects
-    projectDetails.forEach(projectDetail => {
-        if (projectDetail.classList.contains('active')) {
-            initializeGallery(projectDetail);
+        updateSlide(0);
+    });
+
+    // Keyboard navigation for all carousels
+    document.addEventListener('keydown', (e) => {
+        const activeCarousel = document.querySelector('.portfolio-carousel');
+        if (activeCarousel) {
+            const imageSlide = activeCarousel.querySelector('.image-slide');
+            const dots = activeCarousel.querySelectorAll('.dot');
+            let currentSlide = 0;
+            
+            // Find current active slide
+            dots.forEach((dot, index) => {
+                if (dot.classList.contains('active')) {
+                    currentSlide = index;
+                }
+            });
+
+            if (e.key === 'ArrowLeft') {
+                currentSlide = (currentSlide - 1 + 3) % 3;
+                const translateX = -(currentSlide * 33.333);
+                imageSlide.style.transform = `translateX(${translateX}%)`;
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[currentSlide].classList.add('active');
+            } else if (e.key === 'ArrowRight') {
+                currentSlide = (currentSlide + 1) % 3;
+                const translateX = -(currentSlide * 33.333);
+                imageSlide.style.transform = `translateX(${translateX}%)`;
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[currentSlide].classList.add('active');
+            }
         }
     });
 

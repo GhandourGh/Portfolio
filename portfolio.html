@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <!-- Theme initialization -->
+    <script>
+        // Apply theme immediately to prevent flash
+        document.documentElement.style.visibility = 'hidden';
+        document.addEventListener('DOMContentLoaded', function() {
+            document.documentElement.style.visibility = '';
+        });
+        
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+    </script>
+    <!-- boxicons-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- css -->
+    <link rel="stylesheet" href="styles.css?v=1.1">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">Ghandour.</a>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="resume.html">Resume</a>
+            <a href="portfolio.html" class="active">Portfolio</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+        <div class="header-icons">
+            <i class='bx bx-moon' id="darkMode-icon"></i>
+            <i class='bx bx-menu' id="menu-icon"></i>
+        </div>
+    </header>
+    
+    <section class="Portfolio active">
+        <h2 class="heading">My <span>Projects</span></h2>
+        <div class="portfolio-container">
+            <div class="portfolio-box">
+                <div class="portfolio-detail active">
+                    <p class="numb">01</p>
+                        <h3>Face Regognition Attendance System</h3>
+                        <p>An intelligent attendance tracking system that uses real-time facial recognition to identify and log individuals, eliminating the need for manual sign-ins and improving accuracy and security.</p>
+                    <div class="tech">
+                        <p>Python, OpenCV, Tkinter</p>
+                    </div>
+                    <div class="live-github">
+                        <a href="#"><i class='bx bx-link-external'></i><span>Live Demo</span></a>
+                        <a href="https://github.com/GhandourGh/FRS" target="_blank" rel="noopener noreferrer"><i class='bx bxl-github'></i><span>Github Repository</span></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-box">
+                <div class="portfolio-carousel">
+                    <div class="image-slide">
+                        <div class="img-item">
+                            <img src="images/FRS/FRS1.png" alt="FRS Website">
+                        </div>
+                        <div class="img-item">
+                            <img src="images/FRS/FRS2.png" alt="FRS Website">
+                        </div>
+                        <div class="img-item">
+                            <img src="images/FRS/FRS3.png" alt="FRS Website">
+                        </div>
+                        <div class="img-item">
+                            <img src="images/FRS/FRS4.png" alt="FRS Website">
+                        </div>
+                    </div>
+                    <div class="progress-nav">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <div class="slide-counter">
+                            <span class="current">1</span>
+                            <span class="separator">/</span>
+                            <span class="total">4</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    <button class="arrow-left"><i class='bx bx-left-arrow-alt'></i></button>
+                    <button class="arrow-right"><i class='bx bx-right-arrow-alt'></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Project -->
+        <div class="portfolio-container" style="margin-top: 5rem;">
+            <div class="portfolio-box">
+                <div class="portfolio-detail active">
+                    <p class="numb">02</p>
+                    <h3>Portfolio Website</h3>
+                    <p>A responsive and modern website designed to showcase my projects, skills, and contact information — built to reflect my personal brand and front-end development abilities.</p>
+                    <div class="tech">
+                        <p>HTML5, CSS3, JavaScript,EmailJS</p>
+                    </div>
+                    <div class="live-github">
+                        <a href="#"><i class='bx bx-link-external'></i><span>Live Demo</span></a>
+                        <a href="https://github.com/GhandourGh" target="_blank" rel="noopener noreferrer"><i class='bx bxl-github'></i><span>Github Repository</span></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-box">
+                <div class="portfolio-carousel">
+                    <div class="image-slide">
+                        <div class="img-item">
+                            <img src="images/Portfolio/portfolio1.png" alt="Portfolio Website">          
+                        </div>
+                        <div class="img-item">
+                            <img src="images/Portfolio/portfolio2.png" alt="Portfolio Website">
+                        </div>
+                        <div class="img-item">
+                            <img src="images/Portfolio/portfolio3.png" alt="Portfolio Website">
+                        </div>
+                        <div class="img-item">
+                            <img src="images/Portfolio/portfolio4.png" alt="Portfolio Website">
+                        </div>
+                    </div>
+                    <div class="progress-nav">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <div class="slide-counter">
+                            <span class="current">1</span>
+                            <span class="separator">/</span>
+                            <span class="total">4</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    <button class="arrow-left"><i class='bx bx-left-arrow-alt'></i></button>
+                    <button class="arrow-right"><i class='bx bx-right-arrow-alt'></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Third Project -->
+        <div class="portfolio-container" style="margin-top: 5rem;">
+            <div class="portfolio-box">
+                <div class="portfolio-detail active">
+                    <p class="numb">03</p>
+                    <h3>Juicy Burger</h3>
+                    <p>A stylish and interactive website for a burger joint, built to showcase the menu, promote offers, and attract hungry visitors online.</p>
+                    <div class="tech">
+                        <p>HTML5, CSS3, JavaScript</p>
+                    </div>
+                    <div class="live-github">
+                        <a href="#"><i class='bx bx-link-external'></i><span>Live Demo</span></a>
+                        <a href="https://github.com/GhandourGh/BurgerMenu" target="_blank" rel="noopener noreferrer"><i class='bx bxl-github'></i><span>Github Repository</span></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-box">
+                <div class="portfolio-carousel">
+                    <div class="image-slide">
+                        <div class="img-item">
+                            <img src="images/Burger/burger1.png" alt="Burger Website - Home">
+                        </div>
+                        <div class="img-item">
+                            <img src="images/Burger/burger2.png" alt="Burger Website - Menu">
+                        </div>
+                        <div class="img-item">
+                            <img src="images/Burger/burger3.png" alt="Burger Website - Contact">
+                        </div>
+                        <div class="img-item">
+                            <img src="images/Burger/burger4.png" alt="Burger Website - Contact">
+                        </div>
+                    </div>
+                    <div class="progress-nav">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <div class="slide-counter">
+                            <span class="current">1</span>
+                            <span class="separator">/</span>
+                            <span class="total">4</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    <button class="arrow-left"><i class='bx bx-left-arrow-alt'></i></button>
+                    <button class="arrow-right"><i class='bx bx-right-arrow-alt'></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- custom js link -->
+    <script src="script.js?v=1.1"></script>
+</body>
+</html>

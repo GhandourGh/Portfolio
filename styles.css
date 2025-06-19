@@ -35,7 +35,6 @@ body.light-mode {
 html {
     font-size: 62.5%;
     overflow-x: hidden;
-    scroll-behavior: smooth;
 }
 
 body {
@@ -172,23 +171,21 @@ nav a.active {
 }
 
 section {
-    min-height: 100vh;
+    position: absolute;
+    width: 100%;
+    height: 100%;
     padding: 10rem 9% 2rem;
     background: var(--bg-color);
-    display: block;
-    overflow: visible;
+    visibility: hidden;
+    opacity: 0;
+    overflow: hidden;
     transition: opacity 0.5s ease, transform 0.5s ease;
-    position: relative;
-}
-
-section:not(:first-child) {
-    margin-top: 2rem;
 }
 
 section.active {
     visibility: visible;
     opacity: 1;
-    overflow: visible;
+    overflow: auto;
     animation: fadeInUp 0.6s ease;
 }
 
@@ -208,7 +205,6 @@ section#home {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    margin-top: 0;
 }
 
 .home {
@@ -330,8 +326,7 @@ section#home {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-   
-   
+    z-index: 2;
 }
     .home-img .img-box::before,
      .home-img .img-box::after {
@@ -355,7 +350,7 @@ section#home {
 }
 
 .home-img .img-box .img-item{
-    position: a;
+    position: relative;
     width: 150%;
     height: 100%;
     background: var(--bg-color); 
@@ -363,9 +358,8 @@ section#home {
     border: 0.1rem solid var(--bg-color);
     display: flex;
     justify-content: center;
-    z-index: 1;
+    z-index: 2;
     overflow: hidden;
-
 }
 .home-img .img-box .img-item img{ 
     position: absolute;
@@ -720,368 +714,1484 @@ section#home {
 }
 
 .portfolio-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-top: 5rem;
+    padding: 3rem;
+    background: rgba(50, 58, 70, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 229, 255, 0.1);
+    animation: contactGlow 3s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+.portfolio-container:hover {
+    transform: scale(1.01);
+    box-shadow: 0 12px 40px rgba(0, 229, 255, 0.15);
+}
+
+.portfolio-box {
+    flex: 1;
+    position: relative;
+}
+
+.portfolio-detail {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     padding: 2rem;
 }
 
-/* Project Selector */
-.project-selector {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-bottom: 4rem;
-    flex-wrap: wrap;
+.portfolio-detail.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.project-btn {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.5rem 2.5rem;
-    background: rgba(0, 229, 255, 0.1);
-    border: 2px solid var(--main-color);
-    border-radius: 1rem;
-    color: var(--text-color);
-    font-size: 1.6rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: "Poppins", sans-serif;
-}
-
-.project-btn:hover {
-    background: var(--main-color);
-    color: var(--bg-color);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0, 229, 255, 0.3);
-}
-
-.project-btn.active {
-    background: var(--main-color);
-    color: var(--bg-color);
-    box-shadow: 0 0 20px var(--main-color);
-}
-
-.project-btn i {
-    font-size: 2rem;
-}
-
-/* Project Content */
-.project-content {
-    position: relative;
-}
-
-.project-detail {
-    display: none;
-    animation: fadeInUp 0.6s ease;
-}
-
-.project-detail.active {
-    display: block;
-}
-
-/* Project Info */
-.project-info {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(0, 229, 255, 0.2);
-    border-radius: 2rem;
-    padding: 3rem;
-    margin-bottom: 3rem;
-    backdrop-filter: blur(10px);
-}
-
-.project-info h3 {
-    font-size: 2.8rem;
-    color: var(--main-color);
-    margin-bottom: 1.5rem;
+.portfolio-box .numb {
+    font-size: 8rem;
+    background: linear-gradient(45deg, var(--main-color), transparent);
+    -webkit-background-clip: text; /* For Safari */
+    background-clip: text; /* For other browsers */
+    -webkit-text-fill-color: transparent;
     font-weight: 700;
-}
-
-.project-info p {
-    font-size: 1.6rem;
-    line-height: 1.8;
-    margin-bottom: 2rem;
-    color: var(--text-color);
-}
-
-/* Tech Stack */
-.tech-stack h4 {
-    font-size: 1.8rem;
-    color: var(--text-color);
     margin-bottom: 1rem;
-    font-weight: 600;
+    opacity: 0.5;
+    transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.tech-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+.portfolio-container:hover .numb {
+    opacity: 0.8;
+}
+
+.portfolio-box h3 {
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--main-color);
+}
+
+.portfolio-box p {
+    font-size: 1.6rem;
     margin-bottom: 2rem;
+    line-height: 1.6;
 }
 
-.tech-tags span {
-    padding: 0.8rem 1.5rem;
-    background: var(--main-color);
-    color: var(--bg-color);
-    border-radius: 2rem;
+.portfolio-box .tech {
+    margin: 2rem 0;
+    padding: 1rem 2rem;
+    background: rgba(0, 229, 255, 0.1);
+    border-radius: 1rem;
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                background 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.portfolio-box .tech:hover {
+    transform: scale(1.05);
+    background: rgba(0, 229, 255, 0.15);
+}
+
+.portfolio-box .tech p {
     font-size: 1.4rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    margin: 0;
+    color: var(--main-color);
 }
 
-.tech-tags span:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
-}
-
-/* Project Links */
-.project-links {
+.portfolio-box .live-github {
     display: flex;
     gap: 2rem;
-    flex-wrap: wrap;
+    margin-top: 3rem;
 }
 
-.project-link {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.2rem 2rem;
-    background: rgba(0, 229, 255, 0.1);
-    border: 2px solid var(--main-color);
-    border-radius: 1rem;
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
+.portfolio-box .live-github a {
+    position: relative;
+    display: inline-flex;
+    padding: 1.5rem;
+    font-size: 3.5rem;
+    color: var(--white-color);
+    border-radius: 50%;
+    background: var(--bg-color);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                background 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.project-link:hover {
-    background: var(--main-color);
-    color: var(--bg-color);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 229, 255, 0.3);
+.portfolio-box .live-github a:hover {
+    color: var(--main-color);
+    background: var(--second-bg-color);
+    box-shadow: 0 0 1rem var(--main-color);
+    transform: scale(1.05);
 }
 
-.project-link i {
+/* Light mode specific styles for portfolio hover */
+
+
+.portfolio-box .live-github a:first-child {
+    margin-right: 1.5rem;
+}
+
+.portfolio-box .live-github a:first-child i {
+    transform: rotate(135deg);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.portfolio-box .live-github a span {
+    position: absolute;
+    top: -60%;
+    left: 50%;
+    transform: translateX(-50%) scale(0.9);
     font-size: 1.8rem;
+    white-space: nowrap;
+    padding: 0.6rem 1.8rem;
+    border-radius: 0.6rem;
+    pointer-events: none;
+    background: var(--white-color);
+    color: var(--bg-color);
+    opacity: 0;
+    scale: 0.9;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                top 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Project Gallery */
-.project-gallery {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(0, 229, 255, 0.2);
-    border-radius: 2rem;
-    padding: 3rem;
-    backdrop-filter: blur(10px);
+.portfolio-box .live-github a:hover span {
+    top: -70%;
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
 }
 
-.gallery-carousel {
+.portfolio-box .portfolio-carousel {
     position: relative;
-    overflow: hidden;
-    border-radius: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.gallery-slide {
-    display: none;
-    position: relative;
-}
-
-.gallery-slide.active {
-    display: block;
-    animation: fadeIn 0.5s ease;
-}
-
-.gallery-slide img {
     width: 100%;
-    height: auto;
-    border-radius: 1.5rem;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem rgba(0, 229, 255, 0.2);
+}
+
+.portfolio-carousel .image-slide {
+    display: flex;
+    width: 400%;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-carousel .img-item {
+    width: 25%;
+    height: 400px;
+    padding: 0.5rem;
+}
+
+.portfolio-carousel .img-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0.5rem;
     transition: transform 0.3s ease;
 }
 
-.gallery-slide:hover img {
+.portfolio-carousel .img-item img:hover {
     transform: scale(1.02);
 }
 
-.image-caption {
+.progress-nav {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    color: white;
-    padding: 2rem 1.5rem 1.5rem;
-    font-size: 1.6rem;
-    font-weight: 600;
-    border-radius: 0 0 1.5rem 1.5rem;
-}
-
-/* Gallery Navigation */
-.gallery-nav {
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 2rem;
+    z-index: 10;
 }
 
-.gallery-btn {
+.progress-bar {
+    flex-grow: 1;
+    height: 0.3rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
     background: var(--main-color);
-    border: none;
-    color: var(--bg-color);
-    width: 5rem;
-    height: 5rem;
+    width: 25%;
+    border-radius: 1rem;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 1rem var(--main-color);
+}
+
+.slide-counter {
+    font-size: 1.4rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    min-width: 5rem;
+    justify-content: flex-end;
+}
+
+.slide-counter .current {
+    color: var(--main-color);
+    font-weight: 700;
+}
+
+.slide-counter .separator {
+    opacity: 0.5;
+}
+
+.portfolio-box .navigation {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    pointer-events: none;
+}
+
+.portfolio-box .navigation button {
+    width: 4rem;
+    height: 4rem;
+    background: rgba(0, 229, 255, 0.1);
+    border: 2px solid var(--main-color);
+    color: var(--main-color);
     border-radius: 50%;
+   
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
     font-size: 2rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 1rem rgba(0, 229, 255, 0.2);
+    pointer-events: auto;
 }
 
-.gallery-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
-}
-
-.gallery-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-}
-
-.gallery-dots {
-    display: flex;
-    gap: 1rem;
-}
-
-.gallery-dots .dot {
-    width: 1.2rem;
-    height: 1.2rem;
-    border-radius: 50%;
-    background: rgba(0, 229, 255, 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.gallery-dots .dot.active {
+.portfolio-box .navigation button:hover {
     background: var(--main-color);
-    transform: scale(1.2);
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    color: var(--bg-color);
+    transform: scale(1.05);
+    box-shadow: 0 0 2rem var(--main-color);
 }
 
 /* Light mode adjustments */
-body.light-mode .project-info,
-body.light-mode .project-gallery {
-    background: rgba(31, 36, 45, 0.05);
-    border: 1px solid rgba(31, 36, 45, 0.1);
+body.light-mode .progress-bar {
+    background: rgba(0, 0, 0, 0.1);
 }
 
-body.light-mode .project-btn {
-    background: rgba(31, 36, 45, 0.05);
-    border: 2px solid var(--main-color);
-    color: var(--text-color);
-}
-
-body.light-mode .project-btn:hover,
-body.light-mode .project-btn.active {
-    background: var(--main-color);
-    color: var(--bg-color);
-}
-
-body.light-mode .project-link {
-    background: rgba(31, 36, 45, 0.05);
-    border: 2px solid var(--main-color);
-    color: var(--text-color);
-}
-
-body.light-mode .project-link:hover {
-    background: var(--main-color);
-    color: var(--bg-color);
-}
-
-/* Responsive Design */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .project-selector {
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
+    .portfolio-carousel .img-item {
+        height: 300px;
     }
     
-    .project-btn {
-        width: 100%;
-        max-width: 300px;
-        justify-content: center;
+    .progress-nav {
+        width: 85%;
+        bottom: 1.5rem;
     }
     
-    .project-info,
-    .project-gallery {
-        padding: 2rem;
-    }
-    
-    .project-info h3 {
-        font-size: 2.4rem;
-    }
-    
-    .tech-tags {
-        justify-content: center;
-    }
-    
-    .project-links {
-        justify-content: center;
-    }
-    
-    .gallery-nav {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    
-    .gallery-btn {
-        width: 4rem;
-        height: 4rem;
+    .portfolio-box .navigation button {
+        width: 3.5rem;
+        height: 3.5rem;
         font-size: 1.8rem;
+    }
+    
+    body {
+        transition: background-color 0.2s ease,
+                    color 0.2s ease;
+    }
+    
+    header {
+        transition: background-color 0.2s ease;
+    }
+    
+    .logo {
+        transition: color 0.2s ease;
+    }
+    
+    nav a {
+        transition: color 0.2s ease,
+                    transform 0.2s ease;
+    }
+    
+    #darkMode-icon {
+        transition: color 0.2s ease,
+                    transform 0.2s ease,
+                    background-color 0.2s ease;
+    }
+    
+    #menu-icon {
+        transition: color 0.2s ease,
+                    transform 0.2s ease;
+    }
+    
+    .header-icons {
+        gap: 2rem;
+    }
+    
+    nav a::after {
+        width: 0;
+        left: 0;
+        transform: none;
+    }
+    
+    nav a:hover::after,
+    nav a.active::after {
+        width: 100%;
+    }
+
+    .contact-form .input-box {
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+    }
+
+    .contact-form .input-box .input-field {
+        width: 100%;
     }
 }
 
 @media (max-width: 480px) {
-    .portfolio-container {
-        padding: 1rem;
+    .portfolio-carousel .img-item {
+        height: 250px;
     }
     
-    .project-info,
-    .project-gallery {
+    .progress-nav {
+        width: 80%;
+        bottom: 1rem;
+        gap: 1rem;
+    }
+    
+    .slide-counter {
+        font-size: 1.2rem;
+        min-width: 4rem;
+    }
+    
+    .portfolio-box .navigation button {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.6rem;
+    }
+    
+    .header-icons {
+        gap: 1.5rem;
+    }
+
+    .contact-form .input-box {
+        gap: 1rem;
+        width: 100%;
+    }
+    
+    .contact-form .input-box .input-field input,
+    .contact-form .textarea-field textarea {
+        padding: 1.2rem;
+        font-size: 1.4rem;
+        
+    }
+}
+
+.text-animate {
+    position: relative;
+    display: inline-flex;
+}
+
+.text-animate span {
+    position: relative;
+    display: inline-block;
+    opacity: 0;
+    animation: showText 0.5s ease forwards;
+    animation-delay: calc(.2s * var(--i));
+}
+
+@keyframes showText {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.typing-text {
+    position: relative;
+    color: var(--main-color);
+}
+
+.typing-text::after {
+    content: '|';
+    position: absolute;
+    right: -8px;
+    color: var(--main-color);
+    background: var(--bg-color);
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.animated-text-lines {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.text-line {
+    position: absolute;
+    white-space: nowrap;
+    color: rgba(0, 229, 255, 0.03);
+    font-size: 8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    pointer-events: none;
+    display: flex;
+    gap: 2rem;
+    width: max-content;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.text-line span {
+    display: inline-block;
+}
+
+.text-line:nth-child(1) {
+    top: 20%;
+    animation: moveText1 60s linear infinite;
+    animation-delay: -20s;
+}
+
+.text-line:nth-child(2) {
+    top: 35%;
+    animation: moveText2 65s linear infinite;
+    animation-delay: -43.33s;
+}
+
+.text-line:nth-child(3) {
+    top: 50%;
+    animation: moveText1 70s linear infinite;
+    animation-delay: -35s;
+}
+
+.text-line:nth-child(4) {
+    top: 65%;
+    animation: moveText2 75s linear infinite;
+    animation-delay: -25s;
+}
+
+.text-line:nth-child(5) {
+    top: 80%;
+    animation: moveText1 80s linear infinite;
+    animation-delay: -53.33s;
+}@keyframes moveText1 {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes moveText2 {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Light mode specific styles */
+body.light-mode header {
+    background: var(--bg-color);
+}
+
+body.light-mode .logo {
+    color: var(--text-color);
+}
+
+body.light-mode nav a {
+    color: var(--text-color);
+}
+
+body.light-mode #darkMode-icon {
+    color: var(--text-color);
+}
+
+body.light-mode .text-line {
+    color: rgba(31, 36, 45, 0.03);
+}
+
+/* Contact form styles */
+.contact form {
+    max-width: 70rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact form .input-box {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.contact form .input-box .input-field {
+    position: relative;
+    width: 49%;
+    margin: .8rem 0;
+}
+
+.contact form .input-box .input-field input,
+.contact form .textarea-field textarea {
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem;
+    font-size: 1.6rem;
+    color: var(--text-color);
+    background: var(--second-bg-color);
+    border-radius: .6rem;
+    border: .2rem solid var(--main-color);
+    transition: all 0.3s ease;
+}
+
+.contact form .input-box .input-field input:focus,
+.contact form .textarea-field textarea:focus {
+    border-color: var(--main-color);
+    box-shadow: 0 0 1rem var(--main-color);
+}
+
+.contact form .textarea-field textarea {
+    resize: none;
+}
+
+.contact form .btn-box {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.contact form .btn-box .btn {
+    
+    padding: 1rem 2.5rem;
+    background: var(--main-color);
+    border-radius: .6rem;
+    font-size: 1.6rem;
+    color: var(--bg-color);
+    font-weight: 600;
+    transition: .5s;
+    padding-right: 10px;
+}
+
+.contact form .btn-box .btn:hover {
+    box-shadow: 0 0 1rem var(--main-color);
+}
+
+.dots .dot {
+    transition: background-color 0.5s ease;
+}
+
+/* Light mode specific styles for portfolio */
+body.light-mode .portfolio-detail {
+    background: var(--second-bg-color);
+}
+
+body.light-mode .portfolio-detail h3,
+body.light-mode .portfolio-detail p,
+body.light-mode .portfolio-detail .numb {
+    color: var(--text-color);
+}
+
+body.light-mode .portfolio-detail .tech p {
+    color: var(--text-color);
+}
+
+body.light-mode .portfolio-detail .live-github a {
+    color: var(--text-color);
+    border-color: var(--text-color);
+}
+
+body.light-mode .portfolio-detail .live-github a:hover {
+    color: var(--main-color);
+    background: var(--white-color);
+    box-shadow: 0 0 1rem var(--main-color);
+}
+
+body.light-mode .navigation button {
+    color: var(--text-color);
+    border-color: var(--text-color);
+}
+
+body.light-mode .navigation button:hover {
+    color: var(--bg-color);
+    background: var(--text-color);
+}
+
+body.light-mode .dots .dot {
+    background: var(--text-color);
+}
+
+body.light-mode .dots .dot.active {
+    background: var(--main-color);
+}
+
+/* Theme transition handling */
+.theme-transitioning * {
+    transition: background-color 0.5s ease,
+                color 0.5s ease,
+                border-color 0.5s ease,
+                box-shadow 0.5s ease !important;
+}
+
+.theme-transitioning .portfolio-carousel .image-slide {
+    transition: transform 0.5s ease !important;
+}
+
+/* Prevent transition glitches */
+.portfolio-carousel .image-slide {
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.portfolio-carousel img {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* New Contact Section Styles */
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.contact-container {
+    padding: 3rem;
+    background: rgba(50, 58, 70, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 229, 255, 0.1);
+    animation: contactGlow 3s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+.contact-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.contact-form-container h3 {
+    font-size: 2.4rem;
+    color: var(--main-color);
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+@keyframes contactGlow {
+    0%, 100% {
+        box-shadow: 0 8px 32px rgba(0, 229, 255, 0.1);
+    }
+    50% {
+        box-shadow: 0 8px 32px rgba(0, 229, 255, 0.2);
+    }
+}
+
+.contact-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 229, 255, 0.15);
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 0rem;    
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 229, 255, 0.15);
+}
+
+.contact-item i {
+    font-size: 3rem;
+    color: var(--main-color);
+    background: rgba(0, 229, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover i {
+    background: var(--main-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 20px var(--main-color);
+    transform: scale(1.1);
+}
+
+.contact-details h3 {
+    font-size: 2rem;
+    color: var(--main-color);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.contact-details p {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.contact-link {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.contact-link:hover {
+    color: var(--main-color);
+    transform: scale(1.05);
+    text-shadow: 0 0 10px var(--main-color);
+}
+
+.social-links {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-links h3 {
+    font-size: 2.4rem;
+    color: var(--main-color);
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.social-icon {
+    position: relative;
+    display: inline-flex;
+    padding: 1.5rem;
+    font-size: 3.5rem;
+    color: var(--white-color);
+    border-radius: 50%;
+    background: var(--second-bg-color);
+    transition: 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-icon:hover {
+    color: var(--main-color);
+    background: var(--bg-color);
+    box-shadow: 0 0 1rem var(--main-color);
+    transform: scale(1.1);
+}
+
+/* Contact Form Styles */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.contact-form .input-box {
+    display: flex;
+    gap: 2rem;
+}
+
+.contact-form .input-box .input-field {
+    flex: 1;
+}
+
+.contact-form .input-box .input-field input,
+.contact-form .textarea-field textarea {
+    width: 100%;
+    padding: 1.5rem;
+    font-size: 1.6rem;
+    color: var(--text-color);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.contact-form .input-box .input-field input:focus,
+.contact-form .textarea-field textarea:focus {
+    border-color: var(--main-color);
+    box-shadow: 0 0 1rem var(--main-color);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.contact-form .textarea-field textarea {
+    resize: none;
+    min-height: 10rem;
+}
+
+.contact-form .btn-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.contact-form .btn-box .btn {
+    position: relative;
+   
+    padding: 1.5rem 3rem;
+    background: var(--main-color);
+    border-radius: 1rem;
+    font-size: 1.8rem;
+    color: var(--bg-color);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    overflow: hidden;
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+}
+
+.contact-form .btn-box .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    transition: left 1.5s ease;
+    z-index: 1;
+}
+
+.contact-form .btn-box .btn.sending {
+    animation: sendingPulse 1.5s ease-in-out infinite;
+    background: var(--bg-color);
+    color: var(--main-color);
+}
+
+.contact-form .btn-box .btn.sending::before {
+    left: 0;
+}
+
+.contact-form .btn-box .btn span {
+    position: relative;
+    z-index: 2;
+    transition: color 0.8s ease;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+
+.contact-form .btn-box .btn.sending span {
+    color: var(--main-color);
+}
+
+.contact-form .btn-box .btn.success {
+    background: var(--main-color);
+    box-shadow: 0 0 20px var(--main-color);
+    animation: successGlow 1s ease, successBounce 0.6s ease 0.3s;
+    transform: scale(1.05);
+}
+
+.contact-form .btn-box .btn.success span {
+    color: var(--bg-color);
+}
+
+.contact-form .btn-box .btn:hover {
+    box-shadow: 0 0 1rem var(--main-color);
+    transform: scale(1.05);
+}
+
+/* Loading dots animation */
+.loading-dots {
+    display: inline-flex;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    margin-left: 8px;
+    align-items: center;
+}
+
+.loading-dots.show {
+    opacity: 1;
+}
+
+.loading-dots span {
+    width: 5px;
+    height: 5px;
+    margin: 0 3px;
+    background-color: currentColor;
+    border-radius: 50%;
+    display: inline-block;
+    animation: loading-dots 1.5s infinite;
+}
+
+.loading-dots span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.loading-dots span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes loading-dots {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+@keyframes sendingPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(var(--main-color-rgb), 0.7);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 0 10px rgba(var(--main-color-rgb), 0);
+    }
+}
+
+@keyframes successGlow {
+    0% {
+        box-shadow: 0 0 20px var(--main-color);
+    }
+    50% {
+        box-shadow: 0 0 35px var(--main-color);
+    }
+    100% {
+        box-shadow: 0 0 20px var(--main-color);
+    }
+}
+
+@keyframes successBounce {
+    0%, 100% {
+        transform: scale(1.05);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Light mode adjustments for contact section */
+body.light-mode .contact-container {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(31, 36, 45, 0.1);
+}
+
+body.light-mode .contact-item {
+    background: rgba(31, 36, 45, 0.05);
+    border: 1px solid rgba(31, 36, 45, 0.1);
+}
+
+body.light-mode .contact-item:hover {
+    background: rgba(31, 36, 45, 0.1);
+}
+
+body.light-mode .social-links {
+    border-top: 1px solid rgba(31, 36, 45, 0.1);
+}
+
+body.light-mode .contact-form .input-box .input-field input,
+body.light-mode .contact-form .textarea-field textarea {
+    background: rgba(31, 36, 45, 0.05);
+    border: 1px solid rgba(31, 36, 45, 0.1);
+    color: var(--text-color);
+}
+
+body.light-mode .contact-form .input-box .input-field input:focus,
+body.light-mode .contact-form .textarea-field textarea:focus {
+    background: rgba(31, 36, 45, 0.1);
+}
+
+/* Responsive design for contact section */
+@media (max-width: 991px) {
+    .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+    
+    .contact-container {
+        padding: 2rem;
+    }
+    
+    /* Container responsive adjustments */
+    .services-container,
+    .resume-container,
+    .portfolio-container {
+        padding: 2rem;
+        margin-top: 3rem;
+    }
+    
+    /* Header responsive adjustments */
+    header {
+        padding: 1.2rem 5%;
+        gap: 1rem;
+    }
+    
+    nav {
+        gap: 2rem;
+    }
+    
+    nav a {
+        font-size: 1.6rem;
+    }
+    
+    #darkMode-icon {
+        font-size: 2.2rem;
+    }
+    
+    /* Home section responsive adjustments */
+    .home {
+        flex-direction: column;
+        text-align: center;
+        gap: 3rem;
+        padding-top: 8rem;
+    }
+    
+    .home-detail {
+        max-width: 100%;
+        padding-right: 0;
+        order: 2;
+    }
+    
+    .home-detail h1 {
+        font-size: 4.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .home-detail h1::after {
+        width: 30rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .home-detail h2 {
+        font-size: 2.8rem;
+    }
+    
+    .home-detail p {
+        font-size: 1.5rem;
+        margin-bottom: 3rem;
+    }
+    
+    .home-img {
+        order: 1;
+    }
+    
+    .home-img .img-box {
+        width: 25rem;
+        height: 25rem;
+    }
+    
+    .home-img .img-box .img-item img {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        padding: 2rem;
+        margin: 0 1rem;
+    }
+    
+    .contact-info {
+        gap: 1.5rem;
+    }
+    
+    .contact-item {
         padding: 1.5rem;
     }
     
-    .project-info h3 {
+    .contact-details h3 {
+        font-size: 1.8rem;
+    }
+    
+    .contact-details p {
+        font-size: 1.6rem;
+    }
+    
+    .social-links h3 {
         font-size: 2rem;
     }
     
-    .project-info p {
+    .social-icon {
+        font-size: 3rem;
+        padding: 1.2rem;
+    }
+    
+    .contact-form .input-box {
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+    
+    .contact-form .btn-box .btn {
+        padding: 1.2rem 2.5rem;
+        font-size: 1.6rem;
+    }
+    
+    /* Container mobile adjustments */
+    .services-container,
+    .resume-container,
+    .portfolio-container {
+        padding: 1.5rem;
+        margin: 0 1rem;
+        margin-top: 2rem;
+    }
+    
+    .services-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .portfolio-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .portfolio-box .portfolio-carousel {
+        height: 40rem;
+    }
+    
+    .portfolio-carousel .img-item {
+        padding: 1.5rem;
+    }
+    
+    /* Header mobile adjustments */
+    header {
+        padding: 0.8rem 3%;
+        grid-template-columns: 1fr auto;
+        gap: 0.8rem;
+    }
+    
+    /* Mobile menu styles */
+    nav {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100vh;
+        background: var(--bg-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+        transition: left 0.4s ease;
+        z-index: 99;
+    }
+    
+    nav.active {
+        left: 0;
+        animation: slideInMenu 0.4s ease;
+    }
+    
+    @keyframes slideInMenu {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    nav a {
+        font-size: 2.4rem;
+        margin: 0;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+    }
+    
+    nav.active a {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    nav.active a:nth-child(1) { transition-delay: 0.1s; }
+    nav.active a:nth-child(2) { transition-delay: 0.2s; }
+    nav.active a:nth-child(3) { transition-delay: 0.3s; }
+    nav.active a:nth-child(4) { transition-delay: 0.4s; }
+    nav.active a:nth-child(5) { transition-delay: 0.5s; }
+    
+    .header-icons {
+        gap: 0.6rem;
+    }
+    
+    #darkMode-icon {
+        font-size: 2rem;
+        padding: 0.4rem;
+    }
+    
+    #menu-icon {
+        display: block;
+        font-size: 3.5rem;
+    }
+    
+    #menu-icon.bx-x {
+        transform: rotate(180deg);
+    }
+    
+    /* Home section mobile adjustments */
+    .home {
+        gap: 2.5rem;
+        padding-top: 10rem;
+    }
+    
+    .home-detail h1 {
+        font-size: 3.8rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    .home-detail h1::after {
+        width: 25rem;
+    }
+    
+    .home-detail h2 {
+        font-size: 2.4rem;
+    }
+    
+    .home-detail p {
+        font-size: 1.4rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .home-img .img-box {
+        width: 22rem;
+        height: 22rem;
+    }
+    
+    .btn {
+        padding: 0.8rem 2.5rem;
         font-size: 1.4rem;
     }
     
-    .tech-tags span {
-        font-size: 1.2rem;
-        padding: 0.6rem 1.2rem;
+    .home-detail .btn-sci {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .home-detail .btn-sci .sci {
+        margin-left: 0;
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+    }
+
+    .home-detail .btn-sci .sci a {
+        padding: 1.2rem;
+        font-size: 3rem;
+        margin: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-container {
+        padding: 1.5rem;
     }
     
-    .project-link {
+    .contact-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .contact-item i {
+        font-size: 2.5rem;
+        padding: 1rem;
+    }
+    
+    .social-icons {
+        gap: 1.5rem;
+    }
+    
+    .social-icon {
+        font-size: 2.5rem;
+        padding: 1rem;
+    }
+    
+    .contact-form .input-box .input-field input,
+    .contact-form .textarea-field textarea {
+        font-size: 1.4rem;
+        padding: 1.2rem;
+    }
+    
+    .contact-form .textarea-field textarea {
+        min-height: 8rem;
+    }
+    
+    /* Container small screen adjustments */
+    .services-container,
+    .resume-container,
+    .portfolio-container {
+        padding: 1rem;
+        margin: 0 0.5rem;
+        margin-top: 1.5rem;
+    }
+    
+    .portfolio-box .portfolio-carousel {
+        height: 35rem;
+    }
+    
+    .portfolio-carousel .img-item {
+        padding: 1rem;
+    }
+    
+    /* Header small screen adjustments */
+    header {
+        padding: 0.6rem 2%;
+        gap: 0.6rem;
+    }
+    
+    .logo {
+        font-size: 2.5rem;
+    }
+    
+    .header-icons {
+        gap: 0.4rem;
+    }
+    
+    #darkMode-icon {
+        font-size: 1.8rem;
+        padding: 0.3rem;
+    }
+    
+    #menu-icon {
+        font-size: 3rem;
+    }
+    
+    /* Home section small screen adjustments */
+    .home {
+        gap: 2rem;
+        padding-top: 12rem;
+}
+
+    .home-detail h1 {
+        font-size: 3.2rem;
+        margin-bottom: 1rem;
+}
+
+    .home-detail h1::after {
+        width: 20rem;
+}
+
+    .home-detail h2 {
+        font-size: 2rem;
+}
+
+    .home-detail p {
         font-size: 1.3rem;
-        padding: 1rem 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .home-img .img-box {
+        width: 18rem;
+        height: 18rem;
+        margin-top: 3rem;
+}
+
+    .btn {
+        padding: 0.7rem 2rem;
+        font-size: 1.3rem;
+}
+
+    .home-detail .btn-sci {
+        gap: 1.5rem;
+    }
+
+    .home-detail .btn-sci .sci {
+        gap: 1.2rem;
+}
+
+    /* Mobile menu small screen adjustments */
+    nav a {
+        font-size: 1.8rem;
+        margin: 2.5rem 0;
+}
+
+    .home-detail .btn-sci {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+}
+
+    .home-detail .btn-sci .sci {
+        margin-left: 0;
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+}
+
+    .home-detail .btn-sci .sci a {
+        padding: 1rem;
+        font-size: 2.5rem;
+        margin: 0;
     }
 }
 
