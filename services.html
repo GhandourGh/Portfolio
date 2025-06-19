@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <!-- Theme initialization -->
+    <script>
+        // Apply theme immediately to prevent flash
+        document.documentElement.style.visibility = 'hidden';
+        document.addEventListener('DOMContentLoaded', function() {
+            document.documentElement.style.visibility = '';
+        });
+        
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+    </script>
+    <!-- boxicons-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- css -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">Ghandour.</a>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="services.html" class="active">Services</a>
+            <a href="resume.html">Resume</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+        <div class="header-icons">
+            <i class='bx bx-moon' id="darkMode-icon"></i>
+        <i class='bx bx-menu' id="menu-icon"></i>
+        </div>
+    </header>
+    <!-- Services -->
+    <section class="services active">
+        <h2 class="heading">My <span>Services</span></h2>
+        <div class="services-container">
+            <div class="services-box">
+                <div class="icon">
+                    <i class='bx bx-code-alt'></i>
+                    <a href="#"><i class='bx bx-arrow-back'></i></a>
+                </div>
+                <h3>Web Development</h3>
+                <p>I create responsive, user-friendly websites that are optimized for search engines and easy to maintain.</p>
+            </div>
+            <div class="services-box">
+                <div class="icon">
+                    <i class='bx bx-code-alt'></i>
+                    <a href="#"><i class='bx bx-arrow-back'></i></a>
+                </div>
+                <h3>UI/UX Design</h3>
+                <p>I design intuitive, user-friendly interfaces that enhance user experience and engagement.</p>
+            </div>
+            <div class="services-box">
+                <div class="icon">
+                    <i class='bx bx-palette'></i>
+                    <a href="#"><i class='bx bx-arrow-back'></i></a>
+                </div>
+                <h3>Graphic Design</h3>
+                <p>I create visually appealing, brand-consistent graphics that enhance brand identity and user engagement.</p>
+            </div>
+            <div class="services-box">
+                <div class="icon">
+                    <i class='bx bx-trending-up'></i>
+                    <a href="#"><i class='bx bx-arrow-back'></i></a>
+                </div>
+                <h3>SEO Optimization</h3>
+                <p>I optimize websites for search engines to improve visibility and drive organic traffic.</p>
+            </div>
+            <div class="services-box">
+                <div class="icon">
+                    <i class='bx bx-slideshow'></i>
+                    <a href="#"><i class='bx bx-arrow-back'></i></a>
+                </div>
+                <h3>Video Editing</h3>
+                <p>I edit videos to enhance the user experience and drive conversions.</p>
+            </div>
+            <div class="services-box">
+                <div class="icon">
+                    <i class='bx bx-camera'></i>
+                    <a href="#"><i class='bx bx-arrow-back'></i></a>
+                </div>
+                <h3>Photography</h3>
+                <p>I capture and edit photos to enhance the user experience and drive conversions.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- custom js link -->
+    <script src="script.js"></script>
+</body>
+</html> 

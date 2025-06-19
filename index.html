@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <!-- Theme initialization -->
+    <script>
+        // Apply theme immediately to prevent flash
+        document.documentElement.style.visibility = 'hidden';
+        document.addEventListener('DOMContentLoaded', function() {
+            document.documentElement.style.visibility = '';
+        });
+        
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+    </script>
+    <!-- boxicons-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- css -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">Ghandour.</a>
+
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="services.html">Services</a>
+            <a href="resume.html">Resume</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+        <div class="header-icons">
+            <i class='bx bx-moon' id="darkMode-icon"></i>
+        <i class='bx bx-menu' id="menu-icon"></i>
+        </div>
+    </header>
+
+    <!-- Home -->
+    <section class="home active">
+        <div class="animated-text-lines">
+            <div class="text-line">
+                <span>Web Developer</span>
+                <span>Web Developer</span>
+                <span>Web Developer</span>
+                <span>Web Developer</span>
+                <span>Web Developer</span>
+                <span>Web Developer</span>
+                <span>Web Developer</span>
+                <span>Web Developer</span>
+                <span>Web Developer</span>
+                <span>Web Developer</span>
+            </div>
+            <div class="text-line">
+                <span>Front-End</span>
+                <span>Front-End</span>
+                <span>Front-End</span>
+                <span>Front-End</span>
+                <span>Front-End</span> 
+                <span>Front-End</span>
+                <span>Front-End</span>
+                <span>Front-End</span>
+                <span>Front-End</span>
+                <span>Front-End</span>
+            </div>
+            <div class="text-line">
+                <span>UI/UX</span>
+                <span>UI/UX</span>
+                <span>UI/UX</span> 
+                <span>UI/UX</span>
+                <span>UI/UX</span>
+                <span>UI/UX</span>
+                <span>UI/UX</span>
+                <span>UI/UX</span>
+                <span>UI/UX</span>
+                <span>UI/UX</span>
+                <span>UI/UX</span>
+                <span>UI/UX</span>
+                <span>UI/UX</span>
+                <span>UI/UX</span>
+                <span>UI/UX</span>
+                <span>UI/UX</span>
+            </div>
+            <div class="text-line">
+                <span>Web Designer</span>
+                <span>Web Designer</span>
+                <span>Web Designer</span>
+                <span>Web Designer</span>
+                <span>Web Designer</span>
+                <span>Web Designer</span>
+                <span>Web Designer</span>
+                <span>Web Designer</span>
+                <span>Web Designer</span>
+                <span>Web Designer</span>
+                <span>Web Designer</span>
+                <span>Web Designer</span>
+                <span>Web Designer</span>
+                <span>Web Designer</span>
+            </div>
+            <div class="text-line">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>React</span>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>React</span>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>React</span>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>React</span>
+             
+            
+            </div>
+        </div>
+        <div class="home-detail">
+            <h1>GhandourGh</h1>
+            <h2>
+                <span class="typing-text"></span>
+            </h2>
+            <p>I'm a dedicated web developer with a strong focus on building responsive, user-friendly, and visually compelling websites. I turn ideas into clean, high-performance digital experiences that work seamlessly across all devices.</p>
+            <div class="btn-sci">
+                <a href="images/CV.pdf" class="btn">Download CV</a>
+                <div class="sci">
+                    <a href="https://github.com/GhandourGh"><i class='bx bxl-github'></i></a>
+                    <a href="https://www.linkedin.com/in/GhandourGh"><i class='bx bxl-linkedin'></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- home img -->
+        <div class="home-img">
+            <div class="img-box">
+                <div class="img-item">
+                    <img src="images/Ghandour.png">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </section>
+<!-- custom js link -->
+    <script src="script.js"></script>
+</body>
+</html>
