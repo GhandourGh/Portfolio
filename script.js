@@ -155,13 +155,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Contact form submission
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
+        console.log('Contact form found and event listener added');
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
+            console.log('Form submitted, starting animation');
             
             // Get elements
             const submitBtn = this.querySelector('button[type="submit"]');
             const btnText = submitBtn?.querySelector('span');
             const loadingDots = submitBtn?.querySelector('.loading-dots');
+            
+            console.log('Button elements:', { submitBtn, btnText, loadingDots });
             
             if (submitBtn && btnText && loadingDots) {
                 // Start loading state
@@ -169,6 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 loadingDots.classList.add('show');
                 btnText.textContent = 'Sending';
                 submitBtn.disabled = true;
+                console.log('Loading state activated');
             }
 
             try {
@@ -201,6 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     submitBtn.classList.remove('sending');
                     submitBtn.classList.add('success');
                     btnText.textContent = 'Message Sent!';
+                    console.log('Success state activated');
                 }
 
                 // Reset form after delay
@@ -210,6 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         submitBtn.classList.remove('success');
                         btnText.textContent = 'Send Message';
                         submitBtn.disabled = false;
+                        console.log('Form reset to initial state');
                     }
                 }, 3000);
 
@@ -223,6 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     loadingDots.classList.remove('show');
                     btnText.textContent = 'Send Message';
                     submitBtn.disabled = false;
+                    console.log('Error state - form reset');
                 }
             }
         });
