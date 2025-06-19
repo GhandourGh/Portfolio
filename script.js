@@ -1,7 +1,31 @@
 // Theme toggle functionality
 const darkModeIcon = document.querySelector('#darkMode-icon');
 const menuIcon = document.querySelector('#menu-icon');
-const nav = document.querySelector('nav');
+const navbar = document.querySelector('nav');
+
+// Menu toggle functionality
+if (menuIcon && navbar) {
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!menuIcon.contains(e.target) && !navbar.contains(e.target)) {
+            menuIcon.classList.remove('bx-x');
+            navbar.classList.remove('active');
+        }
+    });
+
+    // Close menu when clicking a nav link
+    navbar.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            menuIcon.classList.remove('bx-x');
+            navbar.classList.remove('active');
+        });
+    });
+}
 
 // Apply theme on page load
 if (localStorage.getItem('theme') === 'light') {
@@ -31,34 +55,6 @@ if (darkModeIcon) {
             document.body.classList.remove('theme-transitioning');
         }, 500);
     };
-}
-
-// Mobile navigation toggle
-if (menuIcon && nav) {
-    menuIcon.onclick = () => {
-        nav.classList.toggle('active');
-        menuIcon.classList.toggle('bx-menu');
-        menuIcon.classList.toggle('bx-x');
-    };
-
-    // Close mobile menu when clicking on a link
-    const navLinks = nav.querySelectorAll('a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            nav.classList.remove('active');
-            menuIcon.classList.add('bx-menu');
-            menuIcon.classList.remove('bx-x');
-        });
-    });
-
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!nav.contains(e.target) && !menuIcon.contains(e.target)) {
-            nav.classList.remove('active');
-            menuIcon.classList.add('bx-menu');
-            menuIcon.classList.remove('bx-x');
-        }
-    });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
