@@ -298,67 +298,217 @@
 
     <!-- Portfolio Section -->
     <section class="portfolio" id="portfolio">
-        <h2 class="heading">Latest <span>Project</span></h2>
+        <h2 class="heading">My <span>Portfolio</span></h2>
         
         <div class="portfolio-container">
-            <div class="portfolio-box">
-                <div class="portfolio-detail active">
-                    <h3>Face Recognition Attendance System</h3>
-                    <p>A comprehensive attendance management system that uses facial recognition technology to automatically track student attendance. Built with Python and modern UI frameworks.</p>
-                    <div class="tech">
-                        <p>Python</p>
-                        <p>OpenCV</p>
-                        <p>Face Recognition</p>
-                        <p>SQLite</p>
-                        <p>tkinter</p>
-                    </div>
-                    <div class="live-github">
-                        <a href="#" target="_blank" rel="noopener noreferrer">
-                            <i class='bx bx-link-external'></i>
-                            <span>Live Demo</span>
-                        </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer">
-                            <i class='bx bxl-github'></i>
-                            <span>GitHub</span>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="portfolio-carousel">
-                    <div class="image-slide">
-                        <div class="img-item">
-                            <img src="images/FRS/FRS1.png" alt="Face Recognition System">
+            <!-- Project Selector -->
+            <div class="project-selector">
+                <button class="project-btn active" data-project="frs">
+                    <i class='bx bx-face'></i>
+                    <span>Face Recognition System</span>
+                </button>
+                <button class="project-btn" data-project="burger">
+                    <i class='bx bx-restaurant'></i>
+                    <span>Burger Website</span>
+                </button>
+                <button class="project-btn" data-project="portfolio">
+                    <i class='bx bx-palette'></i>
+                    <span>Portfolio Design</span>
+                </button>
+            </div>
+
+            <!-- Project Content -->
+            <div class="project-content">
+                <!-- Face Recognition System -->
+                <div class="project-detail active" id="frs-project">
+                    <div class="project-info">
+                        <h3>Face Recognition Attendance System</h3>
+                        <p>A comprehensive attendance management system that uses facial recognition technology to automatically track student attendance. Built with Python and modern UI frameworks, this system provides accurate and efficient attendance tracking for educational institutions.</p>
+                        <div class="tech-stack">
+                            <h4>Technologies Used:</h4>
+                            <div class="tech-tags">
+                                <span>Python</span>
+                                <span>OpenCV</span>
+                                <span>Face Recognition</span>
+                                <span>SQLite</span>
+                                <span>tkinter</span>
+                            </div>
                         </div>
-                        <div class="img-item">
-                            <img src="images/FRS/FRS2.png" alt="Face Recognition System">
-                        </div>
-                        <div class="img-item">
-                            <img src="images/FRS/FRS3.png" alt="Face Recognition System">
-                        </div>
-                        <div class="img-item">
-                            <img src="images/FRS/FRS4.png" alt="Face Recognition System">
+                        <div class="project-links">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="project-link">
+                                <i class='bx bx-link-external'></i>
+                                <span>Live Demo</span>
+                            </a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="project-link">
+                                <i class='bx bxl-github'></i>
+                                <span>GitHub</span>
+                            </a>
                         </div>
                     </div>
                     
-                    <div class="progress-nav">
-                        <div class="progress-bar">
-                            <div class="progress-fill"></div>
+                    <div class="project-gallery">
+                        <div class="gallery-carousel">
+                            <div class="gallery-slide">
+                                <img src="images/FRS/FRS1.png" alt="Face Recognition System - Main Interface">
+                                <div class="image-caption">Main Interface</div>
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="images/FRS/FRS2.png" alt="Face Recognition System - Recognition Process">
+                                <div class="image-caption">Recognition Process</div>
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="images/FRS/FRS3.png" alt="Face Recognition System - Database Management">
+                                <div class="image-caption">Database Management</div>
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="images/FRS/FRS4.png" alt="Face Recognition System - Reports">
+                                <div class="image-caption">Attendance Reports</div>
+                            </div>
                         </div>
-                        <div class="slide-counter">
-                            <span class="current">1</span>
-                            <span class="separator">/</span>
-                            <span class="total">4</span>
+                        
+                        <div class="gallery-nav">
+                            <button class="gallery-btn prev">
+                                <i class='bx bx-chevron-left'></i>
+                            </button>
+                            <div class="gallery-dots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <button class="gallery-btn next">
+                                <i class='bx bx-chevron-right'></i>
+                            </button>
                         </div>
                     </div>
                 </div>
-                
-                <div class="navigation">
-                    <button class="arrow-left">
-                        <i class='bx bx-chevron-left'></i>
-                    </button>
-                    <button class="arrow-right">
-                        <i class='bx bx-chevron-right'></i>
-                    </button>
+
+                <!-- Burger Website -->
+                <div class="project-detail" id="burger-project">
+                    <div class="project-info">
+                        <h3>Burger Restaurant Website</h3>
+                        <p>A modern, responsive website for a burger restaurant featuring an attractive design, online menu, and seamless user experience. The website showcases delicious food items with high-quality images and easy navigation.</p>
+                        <div class="tech-stack">
+                            <h4>Technologies Used:</h4>
+                            <div class="tech-tags">
+                                <span>HTML5</span>
+                                <span>CSS3</span>
+                                <span>JavaScript</span>
+                                <span>Responsive Design</span>
+                                <span>Modern UI/UX</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="project-link">
+                                <i class='bx bx-link-external'></i>
+                                <span>Live Demo</span>
+                            </a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="project-link">
+                                <i class='bx bxl-github'></i>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-gallery">
+                        <div class="gallery-carousel">
+                            <div class="gallery-slide">
+                                <img src="images/Burger/burger1.png" alt="Burger Website - Homepage">
+                                <div class="image-caption">Homepage</div>
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="images/Burger/burger2.png" alt="Burger Website - Menu">
+                                <div class="image-caption">Menu Section</div>
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="images/Burger/burger3.png" alt="Burger Website - About">
+                                <div class="image-caption">About Section</div>
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="images/Burger/burger4.png" alt="Burger Website - Contact">
+                                <div class="image-caption">Contact Section</div>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-nav">
+                            <button class="gallery-btn prev">
+                                <i class='bx bx-chevron-left'></i>
+                            </button>
+                            <div class="gallery-dots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <button class="gallery-btn next">
+                                <i class='bx bx-chevron-right'></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Design -->
+                <div class="project-detail" id="portfolio-project">
+                    <div class="project-info">
+                        <h3>Portfolio Website Design</h3>
+                        <p>A creative and professional portfolio website showcasing web development skills and projects. Features modern design elements, smooth animations, and responsive layout that works perfectly on all devices.</p>
+                        <div class="tech-stack">
+                            <h4>Technologies Used:</h4>
+                            <div class="tech-tags">
+                                <span>HTML5</span>
+                                <span>CSS3</span>
+                                <span>JavaScript</span>
+                                <span>Responsive Design</span>
+                                <span>CSS Animations</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="project-link">
+                                <i class='bx bx-link-external'></i>
+                                <span>Live Demo</span>
+                            </a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="project-link">
+                                <i class='bx bxl-github'></i>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-gallery">
+                        <div class="gallery-carousel">
+                            <div class="gallery-slide">
+                                <img src="images/Portfolio/portfolio1.png" alt="Portfolio Design - Home">
+                                <div class="image-caption">Home Section</div>
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="images/Portfolio/portfolio2.png" alt="Portfolio Design - Services">
+                                <div class="image-caption">Services Section</div>
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="images/Portfolio/portfolio3.png" alt="Portfolio Design - Resume">
+                                <div class="image-caption">Resume Section</div>
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="images/Portfolio/portfolio4.png" alt="Portfolio Design - Contact">
+                                <div class="image-caption">Contact Section</div>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-nav">
+                            <button class="gallery-btn prev">
+                                <i class='bx bx-chevron-left'></i>
+                            </button>
+                            <div class="gallery-dots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <button class="gallery-btn next">
+                                <i class='bx bx-chevron-right'></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
