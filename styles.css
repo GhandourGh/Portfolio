@@ -2274,3 +2274,62 @@ body.light-mode .contact-form .textarea-field textarea:focus {
     }
 }
 
+/* Mobile Menu Controls */
+.mobile-menu-controls {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-back-btn,
+.mobile-theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: rgba(0, 229, 255, 0.1);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 0.8rem;
+    color: var(--white-color);
+    font-size: 1.6rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.mobile-back-btn:hover,
+.mobile-theme-toggle:hover {
+    background: rgba(0, 229, 255, 0.2);
+    border-color: rgba(0, 229, 255, 0.4);
+    transform: translateX(0.5rem);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+}
+
+.mobile-back-btn i,
+.mobile-theme-toggle i {
+    font-size: 2rem;
+    color: var(--main-color);
+}
+
+.mobile-back-btn span,
+.mobile-theme-toggle span {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+}
+
+/* Hide desktop theme toggle on mobile */
+@media (max-width: 768px) {
+    .header-icons #darkMode-icon {
+        display: none;
+    }
+    
+    .mobile-menu-controls {
+        display: flex;
+    }
+}
+
