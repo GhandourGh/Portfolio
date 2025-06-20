@@ -113,16 +113,16 @@ nav {
 }
 
 #menu-icon {
-    font-size: 3.5rem;
+    font-size: 4rem; 
+    display: none;
+    color: var(--white-color);
+    transition: color 0.2s ease,
+                transform 0.2s ease;
+    cursor: pointer;
     padding: 0.8rem;
-    background: rgba(0, 229, 255, 0.15);
-    border: 2px solid rgba(0, 229, 255, 0.3);
-    border-radius: 0.6rem;
-    min-width: 5rem;
-    min-height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 0.5rem;
+    background: rgba(0, 229, 255, 0.1);
+    border: 1px solid rgba(0, 229, 255, 0.2);
 }
 
 #menu-icon:hover {
