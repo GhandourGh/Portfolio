@@ -113,17 +113,23 @@ nav {
 }
 
 #menu-icon {
-    font-size: 4rem; 
-    display: none;
-    
-    color: var(--white-color);
-    transition: color 0.2s ease,
-                transform 0.2s ease;
+    font-size: 3.5rem;
+    padding: 0.8rem;
+    background: rgba(0, 229, 255, 0.15);
+    border: 2px solid rgba(0, 229, 255, 0.3);
+    border-radius: 0.6rem;
+    min-width: 5rem;
+    min-height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #menu-icon:hover {
-    color: var(--main-color);
-    transform: scale(1.1);
+    background: rgba(0, 229, 255, 0.25);
+    border-color: rgba(0, 229, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+    transform: scale(1.05);
 }
 
 @keyframes headerGlow {
