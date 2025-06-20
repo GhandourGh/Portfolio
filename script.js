@@ -3,10 +3,6 @@ const darkModeIcon = document.querySelector('#darkMode-icon');
 const menuIcon = document.querySelector('#menu-icon');
 const navbar = document.querySelector('nav');
 
-// Mobile menu controls
-const mobileBackBtn = document.querySelector('.mobile-back-btn');
-const mobileThemeToggle = document.querySelector('.mobile-theme-toggle');
-
 // Menu toggle functionality
 if (menuIcon && navbar) {
     menuIcon.onclick = () => {
@@ -31,60 +27,11 @@ if (menuIcon && navbar) {
     });
 }
 
-// Mobile back button functionality
-if (mobileBackBtn) {
-    mobileBackBtn.addEventListener('click', () => {
-        // Close the mobile menu
-        if (menuIcon && navbar) {
-            menuIcon.classList.remove('bx-x');
-            navbar.classList.remove('active');
-        }
-        
-        // Go back in browser history
-        if (window.history.length > 1) {
-            window.history.back();
-        } else {
-            // If no history, go to home page
-            window.location.href = 'index.html';
-        }
-    });
-}
-
-// Mobile theme toggle functionality
-if (mobileThemeToggle) {
-    mobileThemeToggle.addEventListener('click', () => {
-        // Add a class to body during transition
-        document.body.classList.add('theme-transitioning');
-        
-        document.body.classList.toggle('light-mode');
-        
-        // Update the mobile theme toggle icon
-        const mobileIcon = mobileThemeToggle.querySelector('i');
-        if (document.body.classList.contains('light-mode')) {
-            if (mobileIcon) mobileIcon.classList.replace('bx-moon', 'bx-sun');
-            localStorage.setItem('theme', 'light');
-        } else {
-            if (mobileIcon) mobileIcon.classList.replace('bx-sun', 'bx-moon');
-            localStorage.setItem('theme', 'dark');
-        }
-
-        // Remove the transitioning class after the transition is complete
-        setTimeout(() => {
-            document.body.classList.remove('theme-transitioning');
-        }, 500);
-    });
-}
-
 // Apply theme on page load
 if (localStorage.getItem('theme') === 'light') {
     document.body.classList.add('light-mode');
     if (darkModeIcon) {
         darkModeIcon.classList.replace('bx-moon', 'bx-sun');
-    }
-    // Update mobile theme toggle icon
-    if (mobileThemeToggle) {
-        const mobileIcon = mobileThemeToggle.querySelector('i');
-        if (mobileIcon) mobileIcon.classList.replace('bx-moon', 'bx-sun');
     }
 }
 
