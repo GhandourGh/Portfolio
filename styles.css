@@ -265,9 +265,18 @@ section#home {
 .home-detail .btn-sci {
     display: flex;
     align-items: center;
+    
 }
 
 .home-detail .btn-sci .sci {
+    margin-left: 2rem;
+}
+
+.btn-portfolio {
+    background: var(--bg-color);
+    color: var(--main-color);
+    border: .2rem solid var(--main-color);
+    box-shadow: 0 0 1rem var(--main-color);
     margin-left: 2rem;
 }
 
@@ -2054,6 +2063,10 @@ body.light-mode .contact-form .textarea-field textarea:focus {
         padding: 1.2rem;
         font-size: 3rem;
         margin: 0;
+    }
+
+    .btn-portfolio {
+        margin-left: 0;
     }
 }
 
